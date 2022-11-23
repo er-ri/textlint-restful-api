@@ -13,7 +13,7 @@ app.listen(PORT, (err) => {
 });
 
 app.get('/', (req, res) => {
-    res.send("redirect to '/api/textlint'")
+    res.send(`Running at ${PORT}.`)
 });
 
 app.post('/api/textlint', (req, res) => {

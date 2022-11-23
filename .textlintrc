@@ -1,6 +1,7 @@
 {
   "filters": {},
   "rules": {
-    "max-kanji-continuous-len": true
+    "max-kanji-continuous-len": true,
+    "no-dropping-the-ra": true
   }
 }
