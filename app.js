@@ -2,12 +2,14 @@ const TextLintEngine = require('textlint').TextLintEngine;
 const express = require('express');
 const app = express();
 
+const PORT = process.env.PORT || 8081;
+
 app.use(express.urlencoded());      // Parse URL-encoded bodies
 app.use(express.json());            //Used to parse JSON bodies
 
-app.listen(8080, (err) => {
+app.listen(PORT, (err) => {
     if (err) console.log(err);
-    console.log('Running at Port 8080...');
+    console.log(`server started on port ${PORT}`);
 });
 
 app.get('/', (req, res) => {
