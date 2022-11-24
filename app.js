@@ -5,7 +5,7 @@ const app = express();
 const PORT = process.env.PORT || 8081;
 
 app.use(express.urlencoded());      // Parse URL-encoded bodies
-app.use(express.json());            //Used to parse JSON bodies
+app.use(express.json());            // Used to parse JSON bodies
 
 app.listen(PORT, (err) => {
     if (err) console.log(err);
@@ -21,7 +21,7 @@ app.post('/api/textlint', (req, res) => {
     const engine = new TextLintEngine();
     engine.executeOnText(req_text).then(results => {
         res.json({
-            messages: results[0].messages
+            textlint: results[0].messages
         });
     });
 });
