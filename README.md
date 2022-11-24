@@ -15,6 +15,7 @@ npm install --save-dev textlint-rule-no-dropping-the-ra
 ## Install package locally
 ```
 npm install --save-dev ../textlint-rule-ja-conjunction-kanagaki
+npm install --save-dev https://github.com/er-ri/textlint-rule-ja-conjunction-kanagaki/tarball/v1.0.0
 ```
 
 Reference:
