@@ -2,16 +2,18 @@ const TextLintEngine = require('textlint').TextLintEngine;
 const express = require('express');
 const app = express();
 
-app.use(express.urlencoded());      // Parse URL-encoded bodies
-app.use(express.json());            //Used to parse JSON bodies
+const PORT = process.env.PORT || 8081;
 
-app.listen(8080, (err) => {
+app.use(express.urlencoded());      // Parse URL-encoded bodies
+app.use(express.json());            // Used to parse JSON bodies
+
+app.listen(PORT, (err) => {
     if (err) console.log(err);
-    console.log('Running at Port 8080...');
+    console.log(`server started on port ${PORT}`);
 });
 
 app.get('/', (req, res) => {
-    res.send("redirect to '/api/textlint'")
+    res.send(`Running at ${PORT}.`)
 });
 
 app.post('/api/textlint', (req, res) => {
@@ -19,7 +21,7 @@ app.post('/api/textlint', (req, res) => {
     const engine = new TextLintEngine();
     engine.executeOnText(req_text).then(results => {
         res.json({
-            messages: results[0].messages
+            textlint: results[0].messages
         });
     });
 });
