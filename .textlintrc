@@ -3,6 +3,6 @@
   "rules": {
     "max-kanji-continuous-len": true,
     "no-dropping-the-ra": true,
-    "ja-conjunction-kanagaki": true
+    "personal-original": true
   }
 }
