@@ -7,9 +7,12 @@ const PORT = process.env.PORT || 8081;
 app.use(express.urlencoded());      // Parse URL-encoded bodies
 app.use(express.json());            // Used to parse JSON bodies
 
-app.listen(PORT, (err) => {
+var server = app.listen(PORT, (err) => {
     if (err) console.log(err);
-    console.log(`server started on port ${PORT}`);
+    var host = server.address().address
+    var port = server.address().port
+
+    console.log("Example app listening at http://%s:%s", host, port)
 });
 
 app.get('/', (req, res) => {
