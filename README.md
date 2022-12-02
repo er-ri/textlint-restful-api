@@ -1,5 +1,10 @@
 # textlint-restful-api
 
+##
+```
+Procfile : AWS Elastic Beanstalk
+```
+
 ## Getting Started
 ```
 # Install all necessary dependencies at once.
