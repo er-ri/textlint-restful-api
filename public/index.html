@@ -4,25 +4,53 @@
 <head>
     <style>
         .api-editor {
-            width: 50%;
+            width: 100%;
             margin: auto;
             border: 3px solid green;
             min-width: 250px;
             min-height: 100px;
             outline: none;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            word-break: break-word;
         }
     </style>
+    <script src="/jquery/jquery.js"></script>
+    <script>
+        function checkText() {
+            var text = document.getElementById("textBox").innerText;
+            // data = {"text": text};
+            $.ajax({
+                type: "POST",
+                url: "/api/textlint",
+                headers: { "Content-Type": "application/json" },
+                data: JSON.stringify({ text: text }),
+                dataType: "json",
+                encode: true,
+                statusCode: {
+                    404: function (responseObject) {
+                        alert(responseObject.statusCode)
+                    }
+                }
+            }).done(function (data) {
+                $("#textBox").text(data['sanitized_text']);
+                $("#check-result").text(JSON.stringify(data, null, 4));
+            });
+        }
+
+        function clearOutput(){
+            $("#check-result").empty();
+        }
+    </script>
 </head>
 
 <body>
-    <div class="api-editor" contenteditable="true">
+    <div class="api-editor" id="textBox" contenteditable="true">
         <p>
             <br>
         </p>
     </div>
+    <button type="button" onclick="checkText()">Request data</button>
+    <button type="button" onclick="clearOutput()">Clear</button>
+    <pre id="check-result"></pre>
+
 </body>
 
 </html>

@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 8081;
 app.use(express.urlencoded({ extended: true }));    // Parse URL-encoded bodies
 app.use(express.json());                            // Used to parse JSON bodies
 app.use(express.static(__dirname + "/public"));
+app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
 
 var server = app.listen(PORT, (err) => {
     if (err) console.log(err);
@@ -21,9 +22,8 @@ var server = app.listen(PORT, (err) => {
 
 app.get('/', (req, res) => {
     // res.send(`Running at ${PORT}.`)
-    res.render(__dirname + "/index.html", { port: PORT });
+    res.sendFile("index.html");
 });
-
 
 app.post('/api/textlint', (req, res) => {
     const req_text = req.body.text;
@@ -32,7 +32,7 @@ app.post('/api/textlint', (req, res) => {
     // Replace forbidden characters before the textlint processing.
     var sanitized_text = converter.replaceForbiddenForm(req_text);
 
-    engine.executeOnText(req_text).then(results => {
+    engine.executeOnText(sanitized_text).then(results => {
         res.json({
             sanitized_text: sanitized_text,   
             textlint: results[0].messages

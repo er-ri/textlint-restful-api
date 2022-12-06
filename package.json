@@ -26,6 +26,7 @@
   "homepage": "https://github.com/er-ri/textlint-restful-api#readme",
   "devDependencies": {
     "express": "^4.18.2",
+    "jquery": "^3.6.1",
     "textlint": "^12.2.3",
     "textlint-rule-max-kanji-continuous-len": "^1.1.1",
     "textlint-rule-no-dropping-the-ra": "^3.0.0",
