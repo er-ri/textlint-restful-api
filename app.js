@@ -2,9 +2,6 @@ const TextLintEngine = require('textlint').TextLintEngine;
 const express = require('express');
 const app = express();
 
-// User-defined converter table.
-const converter = require("./converter");
-
 const PORT = process.env.PORT || 8081;
 
 app.use(express.urlencoded({ extended: true }));    // Parse URL-encoded bodies
@@ -29,12 +26,8 @@ app.post('/api/textlint', (req, res) => {
     const req_text = req.body.text;
     const engine = new TextLintEngine();
 
-    // Replace forbidden characters before the textlint processing.
-    var sanitized_text = converter.replaceForbiddenForm(req_text);
-
-    engine.executeOnText(sanitized_text).then(results => {
+    engine.executeOnText(req_text).then(results => {
         res.json({
-            sanitized_text: sanitized_text,   
             textlint: results[0].messages
         });
     });
