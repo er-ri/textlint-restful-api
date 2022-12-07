@@ -15,7 +15,7 @@
     <script src="/jquery/jquery.js"></script>
     <script>
         function checkText() {
-            var text = document.getElementById("textBox").innerText;
+            var text = $("#textBox").text();
             // data = {"text": text};
             $.ajax({
                 type: "POST",
