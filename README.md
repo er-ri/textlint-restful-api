@@ -40,6 +40,7 @@ nvm use 16.17.0
 
 sudo amazon-linux-extras install docker
 sudo service docker start
+sudo chmod 666 /var/run/docker.sock
 
 docker build --file ./Dockerfile --tag textlint-restful-api .
 docker run -t -i -p 80:8081 textlint-restful-api
