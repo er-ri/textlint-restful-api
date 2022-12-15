@@ -1,8 +1,9 @@
 {
   "filters": {},
   "rules": {
+    "personal-original": true,
+    "no-mixed-zenkaku-and-hankaku-alphabet": true,
     "max-kanji-continuous-len": true,
-    "no-dropping-the-ra": true,
-    "personal-original": true
+    "no-dropping-the-ra": true
   }
 }
