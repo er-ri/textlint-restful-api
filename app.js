@@ -2,7 +2,7 @@ const TextLintEngine = require('textlint').TextLintEngine;
 const express = require('express');
 const app = express();
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 80;
 
 app.use(express.urlencoded({ extended: true }));    // Parse URL-encoded bodies
 app.use(express.json());                            // Used to parse JSON bodies
