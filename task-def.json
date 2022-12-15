@@ -1,9 +1,9 @@
 {
-    "family": "sample-fargate", 
+    "family": "nodejs-family-fargate", 
     "networkMode": "awsvpc", 
     "containerDefinitions": [
         {
-            "name": "fargate-app", 
+            "name": "fargate-container", 
             "image": "httpd:2.4", 
             "portMappings": [
                 {
@@ -28,5 +28,4 @@
     "cpu": "256", 
     "memory": "512",
     "executionRoleArn": "ecsTaskExecutionRole"
-    
 }
