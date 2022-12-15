@@ -4,7 +4,7 @@
     "containerDefinitions": [
         {
             "name": "fargate-container", 
-            "image": "033571898743.dkr.ecr.ap-northeast-1.amazonaws.com/my-ecr-repo:latest", 
+            "image": "033571898743.dkr.ecr.ap-northeast-1.amazonaws.com/my-ecr-repo:692ff276f388955404812456527b192dff93760d", 
             "portMappings": [
                 {
                     "containerPort": 80, 
