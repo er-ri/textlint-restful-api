@@ -1,32 +1,48 @@
 # textlint-restful-api
 
-##
-```
-Procfile : AWS Elastic Beanstalk
-```
-
 ## Getting Started
 ```
 # Install all necessary dependencies at once.
 npm install --save-dev
 
-npm install --save-dev textlint
-npm install --save-dev express
-npm install --save-dev textlint-rule-max-kanji-continuous-len
-npm install --save-dev textlint-rule-no-dropping-the-ra
+# Start Web Server 
+node app.js
 ```
 
-## Settings on AWS
+## Deploy on AWS Elastic Container Service(ECS) Fargate with Github Action
+Tutorial: [Continuous delivery of container applications to AWS Fargate with GitHub Actions](https://aws.amazon.com/blogs/opensource/github-actions-aws-fargate/)
+* The repository using this method.
+
+```bash
+# Create Elastic Container Repository(ECR)
+aws ecr create-repository --repository-name my-ecr-repo --region ap-northeast-1
+
+# Create Cluster
+aws ecs create-cluster --region ap-northeast-1 --cluster-name my-ecs-clu
+
+# Set up a Fargate service
+aws ecs register-task-definition --region ap-northeast-1 --cli-input-json file://task-def.json
+
+# Create a Fargate service
+# Note: `assignPublicIp=ENABLED`, a public ip address is required when pull image from ECR.
+aws ecs create-service --service-name fargate-service1 --cluster my-ecs-clu --region ap-northeast-1 --task-definition nodejs-family-fargate:1 --desired-count 1 --launch-type "FARGATE" --network-configuration "awsvpcConfiguration={subnets=[subnet-09f96c821d29e903b],securityGroups=[sg-089528644e60b2c2d],assignPublicIp=ENABLED}"
+
+# Stop the Fargate Task(Set count to 0)
+aws ecs update-service --desired-count 0 --cluster "my-ecs-clu" --service "fargate-service1"
+```
+
+------------------------------------------------------
+
+## Deploy on AWS Elastic Beanstalk with Github CI/CD
+Tutorial: [Deploy NodeJS app to AWS Elastic Beanstalk](https://www.red-gate.com/simple-talk/blogs/deploying-a-nodejs-application-from-github-to-aws-elastic-beanstalk-and-creating-a-ci-cd-aws-codepipeline/)
+
+### Note
+Some configurations required on AWS.
 * Elastic Beanstalk(Configurations): set `NPM_USE_PRODUCTION` to `false`.
 * Role: `aws-elasticbeanstalk-ec2-role`
 
-## Install package locally
-```
-npm install --save-dev ../textlint-rule-ja-conjunction-kanagaki
-npm install --save-dev https://github.com/er-ri/textlint-rule-ja-conjunction-kanagaki/tarball/v1.0.0
-```
-
-## AWS EC2
+## Deploy on AWS EC2 Instance
+Command
 ```bash
 #Perform a quick update on your instance:
 sudo yum update -y
