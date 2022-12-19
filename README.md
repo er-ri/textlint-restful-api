@@ -47,6 +47,16 @@ aws ecs create-service --service-name textlint-restful-api-service --cluster m
 
 # Stop/Start the Fargate Task(Set count to 0/1)
 aws ecs update-service --desired-count 0 --cluster "my-ecs-clu" --service "textlint-restful-api-service"
+
+### Get Fargate instance public ip address
+# Get task ID
+aws ecs list-tasks --cluster my-ecs-clu
+
+# Get Task Network Interface ID
+aws ecs describe-tasks --cluster my-ecs-clu --tasks 23ef050332d74003a2ab5362cfa26a3b
+
+# Get public ip address
+aws ec2 describe-network-interfaces --network-interface-ids eni-07424888100a6ec5f
 ```
 
 ------------------------------------------------------
